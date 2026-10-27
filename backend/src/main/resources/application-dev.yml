@@ -1,0 +1,27 @@
+# Dev profile: relaxed settings, OTP printed to console, no real SMTP.
+spring:
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  mail:
+    host: localhost
+    port: 1025
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+
+logging:
+  level:
+    com.eflow: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+
+eflow:
+  auth:
+    # In dev mode, accept any email domain for easier testing
+    allowed-domain: ""
+  device:
+    transport: simulator

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:eflow}
+    username: ${POSTGRES_USER:eflow}
+    password: ${POSTGRES_PASSWORD:changeme}
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+eflow:
+  jwt:
+    secret: test-secret-key-for-testing-only-must-be-at-least-256-bits-long-here!!
+  device:
+    transport: simulator

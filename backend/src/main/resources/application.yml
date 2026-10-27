@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: eflow
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:eflow}
+    username: ${POSTGRES_USER:eflow}
+    password: ${POSTGRES_PASSWORD:changeme}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+
+  mail:
+    host: ${EFLOW_MAIL_HOST:localhost}
+    port: ${EFLOW_MAIL_PORT:587}
+    username: ${EFLOW_MAIL_USERNAME:}
+    password: ${EFLOW_MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+# --- E-FLOW custom properties ---
+eflow:
+  auth:
+    allowed-domain: ${EFLOW_AUTH_ALLOWED_DOMAIN:ssn.edu.in}
+  jwt:
+    secret: ${EFLOW_JWT_SECRET:dev-secret-key-change-in-production-must-be-at-least-256-bits-long!!}
+    access-expiry-ms: ${EFLOW_JWT_ACCESS_EXPIRY_MS:900000}
+    refresh-expiry-ms: ${EFLOW_JWT_REFRESH_EXPIRY_MS:604800000}
+  device:
+    transport: ${EFLOW_DEVICE_TRANSPORT:simulator}
+    command-timeout-ms: ${EFLOW_DEVICE_COMMAND_TIMEOUT_MS:8000}
+    heartbeat-stale-seconds: ${EFLOW_DEVICE_HEARTBEAT_STALE_S:60}
+  geo:
+    max-accuracy-meters: ${EFLOW_GEO_MAX_ACCURACY_M:50}
+    max-staleness-seconds: ${EFLOW_GEO_MAX_STALENESS_S:30}
+    max-speed-kmh: ${EFLOW_GEO_MAX_SPEED_KMH:100}
+  cors:
+    allowed-origins: ${EFLOW_CORS_ORIGINS:http://localhost:5173}
+  mail:
+    from: ${EFLOW_MAIL_FROM:noreply@eflow.local}
+  mqtt:
+    broker-url: ${EFLOW_MQTT_BROKER_URL:tcp://localhost:1883}
+    client-id: ${EFLOW_MQTT_CLIENT_ID:eflow-backend}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
