@@ -12,9 +12,9 @@ hs_err_pid*
 maven-bin/
 
 # === Node / React ===
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
+node_modules/
+dist/
+.vite/
 *.tsbuildinfo
 
 # === Environment ===

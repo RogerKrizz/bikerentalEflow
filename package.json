@@ -1,0 +1,14 @@
+{
+  "name": "bikerental-eflow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-FLOW Campus E-Bike Rental PWA",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "postinstall": "npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "serve -s frontend/dist -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

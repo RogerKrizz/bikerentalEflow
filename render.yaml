@@ -1,0 +1,24 @@
+services:
+  # Frontend Web Service (or Static Site)
+  - type: web
+    name: eflow-frontend
+    env: node
+    plan: free
+    buildCommand: npm --prefix frontend install && npm --prefix frontend run build
+    startCommand: npx serve -s frontend/dist -l $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+
+  # Spring Boot Backend
+  - type: web
+    name: eflow-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: dev
+      - key: PORT
+        value: 8080
